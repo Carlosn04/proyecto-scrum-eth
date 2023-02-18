@@ -17,7 +17,7 @@ function crearDirSiNoExiste(path){
 
 function borrarDirSiExiste(path){
     if(fs.existsSync(path)){ 
-     fs.rm(path, { recursive: true })
+     fs.rmdirSync(path, { recursive: true, force: true }, (error) => console.log(error))
      console.log(`Se ha borrado el directorio ${path}`)
     }
 }
@@ -108,7 +108,7 @@ async function generarGenesis(NETWORK_CHAINID, CUENTA, BALANCE, CUENTAS_ALLOC, N
     if(!fs.existsSync('genesisbase.json')){
        await generarArchivoGenesis()
     }
-    let genesis = JSON.parse(fs.readFileSync('genesisbase.json').toString())
+    let genesis = await JSON.parse(fs.readFileSync('genesisbase.json').toString())
 
     // genesis.timestamp = `0x${timestamp}`
     genesis.config.chainId = NETWORK_CHAINID
@@ -120,10 +120,10 @@ async function generarGenesis(NETWORK_CHAINID, CUENTA, BALANCE, CUENTAS_ALLOC, N
         return acc
     }, {})
 
-    fs.writeFileSync(`${NETWORK_DIR}/genesis.json`, JSON.stringify(genesis))
+    fs.writeFileSync(`${NETWORK_DIR}/genesis.json`, JSON.stringify(genesis, null, 4))
 }
 
-function lanzarNodo(NUMERO_NETWORK, NUMERO_NODO, DIR_NODE, NETWORK_DIR,
+async function lanzarNodo(NUMERO_NETWORK, NUMERO_NODO, DIR_NODE, NETWORK_DIR,
     IPCPATH, NETWORK_CHAINID, HTTP_PORT, CUENTA, PORT,
     AUTHRPC_PORT, BALANCE,
     CUENTAS_ALLOC) {

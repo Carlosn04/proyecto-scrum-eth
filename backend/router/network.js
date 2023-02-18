@@ -50,24 +50,20 @@ router.get("/create/:network/:node", async (req, res) => {
     ]
 
     await generarGenesis(NETWORK_CHAINID, CUENTA, BALANCE, CUENTAS_ALLOC, NETWORK_DIR)
-    return res.send("OK")
 
     // INICIALIZAMOS EL NODO
     const comando = `geth --datadir ${DIR_NODE} init ${NETWORK_DIR}/genesis.json`
 
-    const result = exec(comando, (error, stdout, stderr) => {
-        console.log("ejecutado")
+    exec(comando, (error, stdout, stderr) => {
+        console.log(`${DIR_NODE} ha sido ejecutado`)
         if (error) {
             res.send({ error })
             return
         }
-        const resultado = launchNode(NUMERO_NETWORK, NUMERO_NODO, DIR_NODE,
+        const resultado = lanzarNodo(NUMERO_NETWORK, NUMERO_NODO, DIR_NODE,
             NETWORK_DIR, IPCPATH, NETWORK_CHAINID,
             HTTP_PORT, CUENTA, PORT, AUTHRPC_PORT, BALANCE, CUENTAS_ALLOC)
 
         res.send(resultado)
     })
 })
-
-
-
