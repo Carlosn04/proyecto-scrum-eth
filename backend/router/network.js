@@ -29,10 +29,10 @@ router.get("/", async (req, res) => {
     res.send(output)
 })
 
-router.get("/create/:network/:node", async (req, res) => {
+router.post("/create", async (req, res) => {
 
-    const NUMERO_NETWORK = parseInt(req.params.network)
-    const NUMERO_NODO = parseInt(req.params.node)
+    const NUMERO_NETWORK = parseInt(req.body.network)
+    const NUMERO_NODO = parseInt(req.body.node)
 
     const { NETWORK_DIR, DIR_NODE, NETWORK_CHAINID, AUTHRPC_PORT, HTTP_PORT, PORT, IPCPATH } = generarParametros(NUMERO_NETWORK, NUMERO_NODO)
 

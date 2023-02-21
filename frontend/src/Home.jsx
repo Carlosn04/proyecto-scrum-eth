@@ -2,6 +2,7 @@
 import { Footer } from "./componentes/Footer"
 import { Headers } from "./componentes/Header"
 import {Outlet} from "react-router-dom"
+import {Nav} from "./componentes/Nav"
 
 export function Home(){
 
@@ -9,7 +10,9 @@ export function Home(){
         <div className="container">
         
             <div><Headers></Headers></div>
-            <hr />
+            
+            <div><Nav></Nav></div>
+        
             <div><Outlet></Outlet></div>
             <hr />
             <div><Footer></Footer></div>

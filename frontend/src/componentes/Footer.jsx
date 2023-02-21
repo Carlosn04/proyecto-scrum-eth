@@ -1,15 +1,79 @@
 
-import { Link } from "react-router-dom"
+
 
 export function Footer(){
 
     return (
-        <div>
+        
+        
+       <div >
+
+            <div className="row">
+
             
-            <div><Link to="/somos">Quienes somos doass</Link></div>
-            <div><Link to="/privacidad">Privacidad</Link></div>
-            <div><Link to="/logos">Logos</Link></div>
-        </div>
+                <div className="col-4">
+                    <ul>
+                        <ol>
+                            Terminos
+                        </ol>
+                        <ol>
+                            Condiciones
+                        </ol>
+                        <ol>
+                            Whitepaper
+                        </ol>
+                    
+                    </ul>
+                
+                </div>
+
+                <div className="col-4">
+                    <ul>
+                        <ol>
+                            Quienes somos
+                        </ol>
+                        <ol>
+                            Mision
+                        </ol>
+                        <ol>
+                            Vsion
+                        </ol>
+                        <ol>
+                            Plan de negocio
+                        </ol>
+                    
+                    
+                    
+                    </ul>
+                
+                </div>
+                <div className="col-4">
+                    <ul>
+                        <ol>
+                            Youtube
+                        </ol>
+                        <ol>
+                            Instagram
+                        </ol>
+                        <ol>
+                            Twitter
+                        </ol>
+                        <ol>
+                            Telegram
+                        </ol>
+                        <ol>
+                            Discord
+                        </ol>
+                    
+                    </ul>
+                
+                </div>
+                
+
+            </div>
+
+       </div>
+            
 
     )
 }
