@@ -14,7 +14,7 @@ export function Footer(){
                 <div className="col-4">
                     <ul>
                         <ol>
-                            Terminos
+                            Termoinos
                         </ol>
                         <ol>
                             Condiciones
