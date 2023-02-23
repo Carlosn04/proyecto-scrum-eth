@@ -26,7 +26,7 @@ export function CrearRed(){
     
     const submit=(data)=>{
         mutation.mutate(data)
-        console.log(data)
+        console.log("hol",data)
     }
 
     
