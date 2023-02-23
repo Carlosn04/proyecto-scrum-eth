@@ -66,4 +66,22 @@ router.post("/create", async (req, res) => {
 
         res.send(resultado)
     })
+<<<<<<< HEAD
 })
+=======
+})
+
+router.get("/", async (req, res) => {
+    createIfNotExists("ETH")    
+    const redes = fs.readdirSync("ETH", { withFileTypes: true }).filter(i => !i.isFile())
+    const output = redes.map(i => {
+        if (!fs.existsSync(`ETH/${i.name}/genesis.json`))
+            return null
+        const genesis = JSON.parse(fs.readFileSync(`ETH/${i.name}/genesis.json`))
+        const cuentas = Object.keys(genesis.alloc)
+        return { numero: i.name, chainid: genesis.config.chainId, cuentas: cuentas }
+    }
+    ).filter(i => i!= null)
+    res.send(output)
+})
+>>>>>>> 62cdf86 (front parte2)
