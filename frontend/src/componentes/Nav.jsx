@@ -18,7 +18,11 @@ export function Nav(){
                             <a class="nav-link" href="#"><Link to="/privacidad" >Crear nodos</Link></a>
                         </li>
                         <li class="nav-item">
+<<<<<<< HEAD
                             <a class="nav-link" href="#"><Link to="/logos" >Logos</Link></a>
+=======
+                            <a class="nav-link" href="#"><Link to="/lista" >Lista</Link></a>
+>>>>>>> 62cdf86 (front parte2)
                         </li>
                        
                     </ul>
