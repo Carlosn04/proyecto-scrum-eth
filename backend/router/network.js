@@ -15,6 +15,7 @@ const PASSWORD = process.env.PASSWORD
 const MICUENTA = process.env.MICUENTA
 const BALANCE = process.env.BALANCE
 
+// TODAS LAS REDES Y CUENTAS EN EL GENESIS
 router.get("/", async (req, res) => {
     crearDirSiNoExiste("ETH")
     const redes = fs.readdirSync("ETH", { withFileTypes: true }).filter(i => !i.isFile())
@@ -29,6 +30,17 @@ router.get("/", async (req, res) => {
     res.send(output)
 })
 
+// TODOS LOS NODOS DE UNA RED
+router.get("/:network", async (req, res) => {
+    const NUMERO_NETWORK = parseInt(req.params.network)
+    const NETWORK_DIR = `ETH/eth${NUMERO_NETWORK}`
+    const nodos = fs.readdirSync(NETWORK_DIR, { withFileTypes: true }).filter(i => !i.isFile())
+    const output = nodos.map(i => JSON.parse(fs.readFileSync(`${NETWORK_DIR}/${i.name}/paramsNodo.json`)).nodo)
+    res.send(output)
+})
+
+
+// CREAR RED Y EL NODO
 router.post("/create", async (req, res) => {
 
     const NUMERO_NETWORK = parseInt(req.body.network)

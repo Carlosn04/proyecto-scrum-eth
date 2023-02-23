@@ -9,9 +9,10 @@ const MICUENTA = process.env.MICUENTA
 const BALANCE = process.env.BALANCE
 
 function crearDirSiNoExiste(path){
-    if(!fs.existsSync(path)) 
+    if(!fs.existsSync(path)){
     fs.mkdirSync(path)
     console.log(`Se ha creado el directorio ${path}`)
+    }
     return
 }
 
