@@ -2,6 +2,7 @@
 import {useForm} from "react-hook-form"
 import { useMutation } from 'react-query';
 import {useState} from "react"
+import { Link } from "react-router-dom";
 
 export function CrearRed(){
     
@@ -18,6 +19,7 @@ export function CrearRed(){
         const datosResponse = await respuesta.json()
         setMensaje(JSON.stringify(datosResponse))
         console.log(datosResponse)
+        
 
         
     } 

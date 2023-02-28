@@ -30,6 +30,40 @@ router.get("/", async (req, res) => {
     res.send(output)
 })
 
+
+//BORRAR UNA RED
+
+router.delete("/:network", (req, res) => {
+    
+    const NETWORK = req.params.network;
+    
+    const NETWORK_DIR = `ETH/${NETWORK}`
+    const nodos = fs.readdirSync(NETWORK_DIR, { withFileTypes: true }).filter(i => !i.isFile())
+    const pids = nodos.map(i => {
+        try {
+            return JSON.parse(fs.readFileSync(`${NETWORK_DIR}/${i.name}/paramsNodo.json`)).subproceso.pid
+        } catch (error) {
+            console.log(error)
+            return null
+        }
+
+    }
+    )
+
+    pids.filter(i => i != null).forEach(i => {
+        try {
+            process.kill(i)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    )
+    
+    fs.rmSync(NETWORK_DIR, {recursive:true})
+    res.send({ network: req.params.network })
+})
+
+
 // TODOS LOS NODOS DE UNA RED
 router.get("/:network", async (req, res) => {
     const NUMERO_NETWORK = parseInt(req.params.network)
