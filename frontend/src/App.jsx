@@ -20,7 +20,7 @@ export function App(){
                 <Route path="/" element={<Home></Home>}>
                     <Route path="/crearred" element={<CrearRed></CrearRed>} ></Route>
                     <Route path="/crearnodos" element={<CrearNodos></CrearNodos>} ></Route>
-                    <Route path="/lista" element={<Lista></Lista>} ></Route>
+                    <Route path="/" element={<Lista></Lista>} ></Route>
                    
                     
                 </Route>
