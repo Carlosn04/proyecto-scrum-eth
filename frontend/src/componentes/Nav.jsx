@@ -12,17 +12,13 @@ export function Nav(){
                     <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#"><Link to="/crearRed" >Crear Red</Link></a>
+                            <a class="nav-link active" aria-current="page" href="#"><Link to="/crearred" >Crear Red</Link></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><Link to="/privacidad" >Crear nodos</Link></a>
+                            <a class="nav-link" href="#"><Link to="/crearnodos" >Crear nodos</Link></a>
                         </li>
                         <li class="nav-item">
-<<<<<<< HEAD
-                            <a class="nav-link" href="#"><Link to="/logos" >Logos</Link></a>
-=======
                             <a class="nav-link" href="#"><Link to="/lista" >Lista</Link></a>
->>>>>>> 62cdf86 (front parte2)
                         </li>
                        
                     </ul>

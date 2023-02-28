@@ -1,9 +1,9 @@
-export function Logos(){
+export function CrearNodos(){
 
     return (
     <div className="container">
 
-       <p>Logos de redes sociales</p>
+       <p>CrearNodos</p>
     </div>
    
     
