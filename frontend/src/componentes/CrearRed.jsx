@@ -34,7 +34,7 @@ export function CrearRed(){
     return (
     
         
-    //formulario
+    
 
     <div className="container">
         {mensaje != "" ? <p  className='alert alert-danger'>{mensaje}</p> : ""}
