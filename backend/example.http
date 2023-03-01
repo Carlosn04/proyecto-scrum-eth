@@ -2,7 +2,8 @@ POST  http://localhost:3000/network/create
 
 ###
 
-GET http://localhost:3000/network
+GET http://localhost:3000/network/1
+
 
 
 ###
