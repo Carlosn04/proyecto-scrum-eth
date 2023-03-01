@@ -30,6 +30,24 @@ router.get("/", async (req, res) => {
     res.send(output)
 })
 
+// TODOS LOS NODOS DE UNA RED
+router.get("/:network", async (req, res) => {
+    const NUMERO_NETWORK = parseInt(req.params.network)
+    const NETWORK_DIR = `ETH/eth${NUMERO_NETWORK}`
+    const nodos = fs.readdirSync(NETWORK_DIR, { withFileTypes: true }).filter(i => !i.isFile())
+    const output = nodos.map(i => JSON.parse(fs.readFileSync(`${NETWORK_DIR}/${i.name}/paramsNodo.json`)).nodo)
+    res.send(output)
+})
+
+// TODOS LOS NODOS DE UNA RED
+router.get("/:network", async (req, res) => {
+    const NUMERO_NETWORK = parseInt(req.params.network)
+    const NETWORK_DIR = `ETH/eth${NUMERO_NETWORK}`
+    const nodos = fs.readdirSync(NETWORK_DIR, { withFileTypes: true }).filter(i => !i.isFile())
+    const output = nodos.map(i => JSON.parse(fs.readFileSync(`${NETWORK_DIR}/${i.name}/paramsNodo.json`)).nodo)
+    res.send(output)
+})
+
 
 //BORRAR UNA RED
 
@@ -47,38 +65,27 @@ router.delete("/:network", (req, res) => {
             return null
         }
 
-    }
-    )
+    })
 
     pids.filter(i => i != null).forEach(i => {
         try {
-            process.kill(i)
+            process.kill(pid, 0)
+            process.kill(pid, 'SIGTERM')
         } catch (error) {
             console.log(error)
         }
-    }
-    )
+    })
     
     fs.rmSync(NETWORK_DIR, {recursive:true})
     res.send({ network: req.params.network })
 })
 
 
-// TODOS LOS NODOS DE UNA RED
-router.get("/:network", async (req, res) => {
+// CREAR UN NODO DENTRO DE UNA RED
+router.post("/add/:network/", async (req, res) => {
+
     const NUMERO_NETWORK = parseInt(req.params.network)
-    const NETWORK_DIR = `ETH/eth${NUMERO_NETWORK}`
-    const nodos = fs.readdirSync(NETWORK_DIR, { withFileTypes: true }).filter(i => !i.isFile())
-    const output = nodos.map(i => JSON.parse(fs.readFileSync(`${NETWORK_DIR}/${i.name}/paramsNodo.json`)).nodo)
-    res.send(output)
-})
-
-
-// CREAR RED Y EL NODO
-router.post("/create", async (req, res) => {
-
-    const NUMERO_NETWORK = parseInt(req.body.network)
-    const NUMERO_NODO = parseInt(req.body.node)
+    const NUMERO_NODO = parseInt(req.params.node)
 
     const { NETWORK_DIR, DIR_NODE, NETWORK_CHAINID, AUTHRPC_PORT, HTTP_PORT, PORT, IPCPATH } = generarParametros(NUMERO_NETWORK, NUMERO_NODO)
 
@@ -112,4 +119,48 @@ router.post("/create", async (req, res) => {
 
         res.send(resultado)
     })
+})
+
+// CREAR VARIOS NODOS DENTRO DE UNA RED
+router.post("/create", async (req, res) => {
+
+    const NUMERO_NETWORK = parseInt(req.body.network)
+    const NUMERO_NODO = parseInt(req.body.node)
+    crearDirSiNoExiste("ETH")
+
+    for (let i = 0; i < NUMERO_NODO; i++) {
+
+        const numeroNodo = i + 1
+        const { NETWORK_DIR, DIR_NODE, NETWORK_CHAINID, AUTHRPC_PORT, HTTP_PORT, PORT, IPCPATH } = generarParametros(NUMERO_NETWORK, numeroNodo)
+
+        borrarDirSiExiste(DIR_NODE)
+        crearDirSiNoExiste(NETWORK_DIR)
+        crearDirSiNoExiste(DIR_NODE)
+
+        const CUENTA = await crearCuenta(DIR_NODE, PASSWORD)
+        const CUENTAS_ALLOC = [
+            CUENTA,
+            MICUENTA
+        ]
+
+        await generarGenesis(NETWORK_CHAINID, CUENTA, BALANCE, CUENTAS_ALLOC, NETWORK_DIR)
+
+        // INICIALIZAMOS EL NODO
+        const comando = `geth --datadir ${DIR_NODE} init ${NETWORK_DIR}/genesis.json`
+
+        exec(comando, (error, stdout, stderr) => {
+            console.log(`${DIR_NODE} ha sido ejecutado`)
+            if (error) {
+                //res.send({ error })
+                return
+            }
+            const resultado = lanzarNodo(NUMERO_NETWORK, i, DIR_NODE,
+                NETWORK_DIR, IPCPATH, NETWORK_CHAINID,
+                HTTP_PORT, CUENTA, PORT, AUTHRPC_PORT, BALANCE, CUENTAS_ALLOC)
+
+            //res.send(resultado)
+        })
+    }
+    res.end()
+    return
 })

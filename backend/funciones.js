@@ -32,7 +32,8 @@ function generarParametros(network, node) {
 
     const HTTP_PORT = 9545 + NUMERO_NODO + NUMERO_NETWORK * 20
     const DIR_NODE = `${NETWORK_DIR}/${NODO}`
-    const IPCPATH = `\\\\.\\pipe\\${NETWORK_CHAINID}-${NODO}.ipc`
+    const IPCPATH = `${NETWORK_CHAINID}-${NODO}.ipc`
+    // PARA EL MAC const IPCPATH = `\\\\.\\pipe\\${NETWORK_CHAINID}-${NODO}.ipc` esto funiciona en mac en linux la de arriba.
     const PORT = 30404 + NUMERO_NODO + NUMERO_NETWORK * 20
     const AUTHRPC_PORT = 9553 + NUMERO_NODO + NUMERO_NETWORK * 20
 
@@ -133,7 +134,7 @@ async function lanzarNodo(NUMERO_NETWORK, NUMERO_NODO, DIR_NODE, NETWORK_DIR,
     const err2 = fs.openSync(`./${DIR_NODE}/outNodo.log`, 'a');
     const params = [
         "--networkid", NETWORK_CHAINID,
-        '--mine',
+        '--mine', `--dev`,// linux hay que poner dev
         '--syncmode', 'full',
         '--datadir', DIR_NODE,
         "--http.addr", "0.0.0.0",

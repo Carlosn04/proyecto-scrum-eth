@@ -14,6 +14,7 @@ const listaNetwork = async () => {
 
 
 
+
 export const Lista = () => {
     const [mensaje, setMensaje] = useState("")
    
@@ -69,12 +70,15 @@ export const Lista = () => {
                         <td><button className="btn btn-danger" 
                                 onClick={() => borrar(item.numero)}>BorrarRed</button></td>
                         <td><button className="btn btn-secondary" 
-                                onClick={() => crear(item.numero)}>CrearNodo</button></td>
+                                onClick={() => borrar(item.numero)}>CrearNodo</button></td>
                         <td><button className="btn btn-warning" 
-                                onClick={() => crear(item.numero)}>ListarNodos</button></td>
+                                onClick={() => borrar(item.numero)}>ListarNodos</button></td>
                     </tr>)
                 }
             </tbody>
+
+              
+         
         </table>
     </div>
 }
