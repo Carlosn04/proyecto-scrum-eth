@@ -55,6 +55,7 @@ export const Lista = () => {
                     <th>cuenta</th>
                     <th></th>
                     <th></th>
+                    <th></th>
 
                 </tr>
             </thead>
@@ -66,9 +67,11 @@ export const Lista = () => {
                         <td>{item.chainid}</td>
                         <td>{item.cuentas.map((cuenta, index2) => <div key={index2}>{cuenta}</div>)}</td>
                         <td><button className="btn btn-danger" 
-                                onClick={() => borrar(item.numero)}>Borrar</button></td>
+                                onClick={() => borrar(item.numero)}>BorrarRed</button></td>
                         <td><button className="btn btn-secondary" 
-                                onClick={() => crear(item.numero)}>Crear</button></td>
+                                onClick={() => crear(item.numero)}>CrearNodo</button></td>
+                        <td><button className="btn btn-warning" 
+                                onClick={() => crear(item.numero)}>ListarNodos</button></td>
                     </tr>)
                 }
             </tbody>
