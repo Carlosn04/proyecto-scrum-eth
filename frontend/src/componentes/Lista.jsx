@@ -34,7 +34,7 @@ export const Lista = () => {
     const mutation = useMutation(sendServer)
 
     const borrar = (network) => {
-        console.log("network", network)
+        console.log("network a eliminar", network)
         mutation.mutate(network)
         
         
@@ -69,10 +69,8 @@ export const Lista = () => {
                         <td>{item.cuentas.map((cuenta, index2) => <div key={index2}>{cuenta}</div>)}</td>
                         <td><button className="btn btn-danger" 
                                 onClick={() => borrar(item.numero)}>BorrarRed</button></td>
-                        <td><button className="btn btn-secondary" 
-                                onClick={() => borrar(item.numero)}>CrearNodo</button></td>
-                        <td><button className="btn btn-warning" 
-                                onClick={() => borrar(item.numero)}>ListarNodos</button></td>
+                        <td><button className="btn btn-secondary" >CrearNodo</button></td>
+                        <td><button className="btn btn-warning" >ListarNodos</button></td>
                     </tr>)
                 }
             </tbody>

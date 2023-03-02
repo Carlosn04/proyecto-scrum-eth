@@ -69,14 +69,14 @@ router.delete("/:network", (req, res) => {
 
     pids.filter(i => i != null).forEach(i => {
         try {
-            process.kill(pid, 0)
-            process.kill(pid, 'SIGTERM')
+            process.kill(0)
+            
         } catch (error) {
             console.log(error)
         }
     })
     
-    fs.rmSync(NETWORK_DIR, {recursive:true})
+    fs.rmSync(NETWORK_DIR, {recursive: true,force:true}) // se añade en linux force para forzar sudo permisos
     res.send({ network: req.params.network })
 })
 
