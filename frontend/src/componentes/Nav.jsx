@@ -15,9 +15,7 @@ export function Nav(){
                             <a class="nav-link" href="#"><Link to="/" >Lista</Link></a>
                         </li>
                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><Link to="/crearnodos" >Crear nodos</Link></a>
-                        </li>
+                        
                       
                     </ul>
                     </div>

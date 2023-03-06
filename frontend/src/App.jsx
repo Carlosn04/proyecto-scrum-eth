@@ -2,7 +2,7 @@ import {BrowserRouter,Routes,Route,} from 'react-router-dom'
 import { Home } from './Home'
 import { CrearRed } from './componentes/CrearRed'
 import {Lista} from './componentes/Lista'
-import { CrearNodos } from './componentes/CrearNodos'
+import {Nodos } from './componentes/Nodos'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 
@@ -19,7 +19,7 @@ export function App(){
             <Routes>
                 <Route path="/" element={<Home></Home>}>
                     <Route path="/crearred" element={<CrearRed></CrearRed>} ></Route>
-                    <Route path="/crearnodos" element={<CrearNodos></CrearNodos>} ></Route>
+                    <Route path="/:id" element={<Nodos></Nodos>} ></Route>
                     <Route path="/" element={<Lista></Lista>} ></Route>
                    
                     

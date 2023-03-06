@@ -30,14 +30,7 @@ router.get("/", async (req, res) => {
     res.send(output)
 })
 
-// TODOS LOS NODOS DE UNA RED
-router.get("/:network", async (req, res) => {
-    const NUMERO_NETWORK = parseInt(req.params.network)
-    const NETWORK_DIR = `ETH/eth${NUMERO_NETWORK}`
-    const nodos = fs.readdirSync(NETWORK_DIR, { withFileTypes: true }).filter(i => !i.isFile())
-    const output = nodos.map(i => JSON.parse(fs.readFileSync(`${NETWORK_DIR}/${i.name}/paramsNodo.json`)).nodo)
-    res.send(output)
-})
+
 
 // TODOS LOS NODOS DE UNA RED
 router.get("/:network", async (req, res) => {
@@ -51,7 +44,7 @@ router.get("/:network", async (req, res) => {
 
 //BORRAR UNA RED
 
-router.delete("/:network", (req, res) => {
+router.delete("/:network", async (req, res) => {
     
     const NETWORK = req.params.network;
     
@@ -67,30 +60,32 @@ router.delete("/:network", (req, res) => {
 
     })
 
-    pids.filter(i => i != null).forEach(i => {
+    pids.filter(i => i !== null).forEach(i => {
         try {
-            process.kill(0)
+            process.kill(i, 0)
+            process.kill(i, 'SIGTERM')
             
         } catch (error) {
             console.log(error)
         }
     })
     
-    fs.rmSync(NETWORK_DIR, {recursive: true,force:true}) // se añade en linux force para forzar sudo permisos
+    fs.rmSync(NETWORK_DIR, {recursive: true, force:true}) // se añade en linux force para forzar sudo permisos
     res.send({ network: req.params.network })
 })
 
 
 // CREAR UN NODO DENTRO DE UNA RED
-router.post("/add/:network/", async (req, res) => {
+router.get("/add/:network/:node", async (req, res) => {
 
     const NUMERO_NETWORK = parseInt(req.params.network)
-    const NUMERO_NODO = parseInt(req.params.node)
+    const NUMERO_NODO = Number(req.params.node)
+
 
     const { NETWORK_DIR, DIR_NODE, NETWORK_CHAINID, AUTHRPC_PORT, HTTP_PORT, PORT, IPCPATH } = generarParametros(NUMERO_NETWORK, NUMERO_NODO)
 
     crearDirSiNoExiste("ETH")
-    borrarDirSiExiste(NETWORK_DIR)
+    // borrarDirSiExiste(NETWORK_DIR)
     crearDirSiNoExiste(NETWORK_DIR)
     crearDirSiNoExiste(DIR_NODE)
     // console.log(DIR_NODE, PASSWORD)
