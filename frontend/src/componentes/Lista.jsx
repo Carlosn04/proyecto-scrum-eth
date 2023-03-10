@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 
 import { Nodos } from "./Nodos"
+import { set } from "react-hook-form"
 
 
 
@@ -13,7 +14,8 @@ const listaNetwork = async () => {
     return datos;
 }
 
-    
+
+
 
 
 
@@ -30,6 +32,7 @@ export const Lista = () => {
     const [mensaje, setMensaje] = useState("")
     
     const [networkNodo,setNetworkNodo]=useState(null)
+   
 
   
 
@@ -51,7 +54,9 @@ export const Lista = () => {
     const borrar = (network) => {
         console.log("network a eliminar", network)
         mutation.mutate(network)
-        
+        window.location.reload()
+       
+       
         
     }
     
@@ -60,9 +65,9 @@ export const Lista = () => {
     //
     
     const Listanodos=(nodos)=>{
-        
+       
         setNetworkNodo(nodos)
-        setMensaje(null)
+        
     }
     const { data, isLoading } = useQuery(["redes"], listaNetwork)
    
@@ -71,6 +76,8 @@ export const Lista = () => {
     return <div>
         
         <h3>Lista de redes</h3>
+        
+
 
         <Link   to ="/crearred/">Nueva Red</Link>
         <table className="table">
@@ -86,6 +93,7 @@ export const Lista = () => {
 
                 </tr>
             </thead>
+            
             <tbody>
                 {
                     data.map((item, index) => <tr key={index}>
@@ -95,9 +103,15 @@ export const Lista = () => {
                         <td>{item.cuentas.map((cuenta, index2) => <div key={index2}>{cuenta}</div>)}</td>
                         
                        
-                        <td><button className="btn btn-danger" 
-                                onClick={() => borrar(item.numero)}>BorrarRed</button></td>
-                        
+                        <td>
+                           
+                            <button className="btn btn-danger" 
+                                
+                                onClick={() => borrar(item.numero)}>BorrarRed</button>
+
+                            
+                            </td>
+                            
                         <td>
                             
                                 <button className="btn btn-warning" onClick={()=>Listanodos(item.numero)}
