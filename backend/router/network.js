@@ -71,7 +71,7 @@ router.delete("/:network", async (req, res) => {
     })
     
     fs.rmSync(NETWORK_DIR, {recursive: true, force:true}) // se añade en linux force para forzar sudo permisos
-    res.send({ network: req.params.network })
+    res.send({ network: req.params.network ,valor:true}) // paso valor un true para que sepa quehemos borrado podemosusar este valor para pedir ul listar redes
 })
 
 

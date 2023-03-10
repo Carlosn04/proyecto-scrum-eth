@@ -11,6 +11,7 @@ export function Nodos(props){
     
     
     const [mensaje, setMensaje] = useState("")
+ 
     const addNodoServer = async(network)=>{
 
         console.log("carlos",network)
@@ -26,6 +27,9 @@ export function Nodos(props){
     const Añadir = (network,nodo) => {
         console.log("añadiendo nodo a la red:", network,nodo)
         mutation.mutate({ network, nodo })
+        
+        
+        
         
         
     }
@@ -49,7 +53,7 @@ export function Nodos(props){
     
     //const params = useParams()
     const newstring=props.valor.substring(3)
-    
+    const estadonodo=props.estado
     //const newstring=params.id.substring(3)
     const listaNodos = async () => {
         const response = await fetch(`http://localhost:3000/network/${newstring}`)
@@ -64,6 +68,7 @@ export function Nodos(props){
     if (isLoading) return <div>Cargando</div>
     return  <div>
         <h1>Lista de nodos creados</h1>
+
         <p>RedEth{data[0].network}</p>
         
             <ul>
@@ -74,7 +79,7 @@ export function Nodos(props){
             </ul>
             {console.log("longitud",Object.keys(data).length)}
         <div><button className="btn btn-warning" onClick={()=>Añadir(data[0].network,data.length+1)} >Crear nodo</button></div>
-       
+        
                
     </div>
     

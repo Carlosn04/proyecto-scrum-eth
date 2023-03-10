@@ -14,7 +14,9 @@ export function Nav(){
                         <li class="nav-item">
                             <a class="nav-link" href="#"><Link to="/" >Lista</Link></a>
                         </li>
-                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><Link to="/fauced" >Fauced</Link></a>
+                        </li>
                         
                       
                     </ul>
