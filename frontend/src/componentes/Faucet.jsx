@@ -20,6 +20,7 @@ export function Faucet() {
         const response = await fetch(`http://localhost:3000/balance/${cuenta}`)
         if (response.status == "200") {
             const datos = await response.json();
+            console.log(datos)
             setSaldo(datos)
         }
     }
@@ -44,9 +45,10 @@ export function Faucet() {
         event.preventDefault()
         enviarEth()
       }
-      
+      const net = !saldo.config ? "" : saldo.config.network
       return (
         <div className="container">
+          <h4>{net}</h4>
           <h5>Cuenta</h5>
           <label>{cuenta}</label>
           <p></p>

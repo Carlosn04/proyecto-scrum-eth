@@ -25,8 +25,10 @@ account.signTransaction(tx).then(tx1 => {
 })*/
 
 router.get("/:cuenta/:cantidad", async (req, res) => {
+    const faucet_config = fs.readFileSync(`faucetconfig.json`)
+    const config = JSON.parse(faucet_config)
     try {
-        const web3 = new Web3(`http://127.0.0.1:9566`)
+        const web3 = new Web3(`http://127.0.0.1:${config.port}`)
         const amount = web3.utils.toWei(`${req.params.cantidad}`, 'ether')
         const txInfo = {
             to: req.params.cuenta,
@@ -38,10 +40,10 @@ router.get("/:cuenta/:cantidad", async (req, res) => {
         const tx = await web3.eth.accounts.signTransaction(txInfo, process.env.PRIVATE_KEY)
 
         const txSend = await web3.eth.sendSignedTransaction(tx.rawTransaction)
-        console.log(txSend)
+        //console.log(txSend)
         // enviar el nuevo saldo
         const balance = await web3.eth.getBalance(req.params.cuenta)
-        res.send({ balance })
+        res.send({ balance, config })
     } catch (err) {
         return res.send(err)
     }

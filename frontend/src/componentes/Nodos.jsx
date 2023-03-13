@@ -62,7 +62,7 @@ export function Nodos(props){
     console.log("en el componente",data)
     if (isLoading) return <div>Cargando</div>
     return  <div>
-        <h1>Lista de nodos creados</h1>
+        <h3>Lista de nodos creados</h3>
 
         <p>RedEth{data[0].network}</p>
         

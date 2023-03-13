@@ -5,6 +5,8 @@ import { useState } from "react"
 import { Nodos } from "./Nodos"
 import { set } from "react-hook-form"
 
+import fs from "fs"
+
 
 
 const listaNetwork = async () => {
@@ -14,27 +16,29 @@ const listaNetwork = async () => {
     return datos;
 }
 
+async function crearConfig(red){
+    const number = parseInt(red.replace(/[^\d]/g, ""));
+    const response = await fetch(`http://localhost:3000/network/${number}`)
+    const datos = await response.json()
+    const PORT = datos[0].http_port
+    const CHAIN_ID = datos[0].chainId
+    const NETWORK = red
+    const create_config = await fetch(`http://localhost:3000/config/${NETWORK}/${PORT}/${CHAIN_ID}`)
+    alert('Se ha cambiado la red!')
 
+    // const jsonBlob = new Blob([JSON.stringify(faucet_config, null, 2)], { type: 'application/json' })
+    // const jsonUrl = URL.createObjectURL(jsonBlob)
+    // const downloadLink = document.createElement('a')
+    // downloadLink.href = jsonUrl
+    // downloadLink.download = 'faucetconfig.json'
+    // downloadLink.click()
+    console.log(NETWORK, PORT, CHAIN_ID)
+}
 
-
-
-
-
-
-export const Lista = () => {
+export const Lista = () => {  
     
-   
-    
-    
-    
-    
-    
-    const [mensaje, setMensaje] = useState("")
-    
+    const [mensaje, setMensaje] = useState("")    
     const [networkNodo,setNetworkNodo]=useState(null)
-   
-
-  
 
     const sendServer = async (network) => {
         console.log(network)
@@ -54,24 +58,14 @@ export const Lista = () => {
     const borrar = (network) => {
         console.log("network a eliminar", network)
         mutation.mutate(network)
-        window.location.reload()
-       
-       
-        
+        window.location.reload()        
     }
     
-    
-    
-    //
-    
     const Listanodos=(nodos)=>{
-       
         setNetworkNodo(nodos)
         
     }
     const { data, isLoading } = useQuery(["redes"], listaNetwork)
-   
-    
     if (isLoading) return <p>Cargando</p>
     return <div>
         
@@ -110,12 +104,19 @@ export const Lista = () => {
                                 onClick={() => borrar(item.numero)}>BorrarRed</button>
 
                             
-                            </td>
+                        </td>
                             
                         <td>
                             
                                 <button className="btn btn-warning" onClick={()=>Listanodos(item.numero)}
                                 >Lista Nodos</button>
+                            
+                        </td>
+
+                        <td>
+                            
+                                <button className="btn btn-primary" onClick={()=> crearConfig(item.numero)}
+                                >Conectar</button>
                             
                         </td>
                     </tr>)
