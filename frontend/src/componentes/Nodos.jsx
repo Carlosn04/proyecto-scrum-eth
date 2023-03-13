@@ -27,11 +27,6 @@ export function Nodos(props){
     const Añadir = (network,nodo) => {
         console.log("añadiendo nodo a la red:", network,nodo)
         mutation.mutate({ network, nodo })
-        
-        
-        
-        
-        
     }
     //const { data, isLoading } = useQuery(["redes"], Nodos)
     //const {data1,isloading1}=useQuery(["nodos"],Nodos)

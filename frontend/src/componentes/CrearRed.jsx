@@ -49,7 +49,7 @@ export function CrearRed(){
             <div>
 
                 <label>Cuenta</label>
-                <input className="form-control" defaultValue="0x9041142ec77b2f07032493Bf5e870Ae1D065c6F4" {...register('cuenta',{required:true})}/>
+                <input className="form-control" defaultValue="0xa56Ae8B9cFd6BC0D38DB7C6B840961668C24B0B3" {...register('cuenta',{required:true})}/>
 
             </div>
 
@@ -61,12 +61,12 @@ export function CrearRed(){
             </div>
             <div>
 
-                <label>Numero Nodo</label>
+                <label>Numero Nodos</label>
                 <input className="form-control" defaultValue="1" {...register('node',{required:true})}/>
 
             </div>
             
-            <input type="submit" value="Crear" className="btn-primary"/>
+            <input type="submit" value="Crear" className="mt-3 btn btn-primary"/>
 
 
         </form>
