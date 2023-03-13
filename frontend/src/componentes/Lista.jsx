@@ -24,7 +24,7 @@ async function crearConfig(red){
     const CHAIN_ID = datos[0].chainId
     const NETWORK = red
     const create_config = await fetch(`http://localhost:3000/config/${NETWORK}/${PORT}/${CHAIN_ID}`)
-    alert('Se ha cambiado la red!')
+    alert('Se ha conectado la red!')
 
     // const jsonBlob = new Blob([JSON.stringify(faucet_config, null, 2)], { type: 'application/json' })
     // const jsonUrl = URL.createObjectURL(jsonBlob)

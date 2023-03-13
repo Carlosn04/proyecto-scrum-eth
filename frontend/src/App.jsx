@@ -6,6 +6,7 @@ import { Nodos } from './componentes/Nodos'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Faucet } from './componentes/Faucet'
+import { Transactions } from './componentes/Transacciones'
 
 
 const queryClient = new QueryClient()
@@ -20,6 +21,7 @@ export function App() {
                         <Route path="/:id" element={<Nodos></Nodos>} ></Route>
                         <Route path="/" element={<Lista ></Lista>} ></Route>
                         <Route path="/faucet" element={<Faucet></Faucet>}></Route>
+                        <Route path="/transacciones" element={<Transactions></Transactions>}></Route>
 
                     </Route>
                 </Routes>

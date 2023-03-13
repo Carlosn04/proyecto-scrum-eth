@@ -1,5 +1,5 @@
 {
-  "network": "eth1",
-  "port": "9566",
-  "chainId": "222334"
+  "network": "eth2",
+  "port": "9586",
+  "chainId": "222335"
 }

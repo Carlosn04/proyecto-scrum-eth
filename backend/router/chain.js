@@ -18,7 +18,19 @@ router.get("/latestBlock", async (req, res) => {
     const secondLatestBlock = await web3.eth.getBlock(latestBlockNumber - 1);
     const thirdLatestBlock = await web3.eth.getBlock(latestBlockNumber - 2);
     const block = [ latestBlock, secondLatestBlock, thirdLatestBlock ]
-    res.send({ block })
+    res.send({ config, latestBlock })
+    } catch(err){
+        res.send(err)
+    }
+})
+
+router.get("/transaction/:data", async (req, res) => {
+    const faucet_config = fs.readFileSync(`faucetconfig.json`)
+    const config = JSON.parse(faucet_config)
+    try {
+    const web3 = new Web3(`http://127.0.0.1:${config.port}`)
+    const tx = await web3.eth.getTransaction(req.params.data);
+    res.send({ tx })
     } catch(err){
         res.send(err)
     }

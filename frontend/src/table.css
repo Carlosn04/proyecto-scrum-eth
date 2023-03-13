@@ -1,0 +1,14 @@
+.block-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .block-table th, .block-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .block-table th {
+    background-color: #f2f2f2;
+  }  

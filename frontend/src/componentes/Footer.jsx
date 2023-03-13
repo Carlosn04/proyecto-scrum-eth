@@ -14,7 +14,7 @@ export function Footer(){
                 <div className="col-4">
                     <ul>
                         <ol>
-                            Termoinos
+                            Términos
                         </ol>
                         <ol>
                             Condiciones
@@ -30,13 +30,10 @@ export function Footer(){
                 <div className="col-4">
                     <ul>
                         <ol>
-                            Quienes somos
+                            Quiénes somos
                         </ol>
                         <ol>
-                            Mision
-                        </ol>
-                        <ol>
-                            Vsion
+                            Visión
                         </ol>
                         <ol>
                             Plan de negocio
@@ -53,13 +50,7 @@ export function Footer(){
                             Youtube
                         </ol>
                         <ol>
-                            Instagram
-                        </ol>
-                        <ol>
                             Twitter
-                        </ol>
-                        <ol>
-                            Telegram
                         </ol>
                         <ol>
                             Discord
